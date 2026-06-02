@@ -14,3 +14,4 @@ class BookResponse(BaseModel):
     author: str
     published_year: int
     pages: int
+    
