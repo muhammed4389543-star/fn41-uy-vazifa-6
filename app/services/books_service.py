@@ -1,14 +1,17 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 from app.db import models
 from app.schemas import books_schemas
 
 
 def get_all_books(db: Session):
-    return db.query(models.Book).all()
+    stmt = select(models.Book)
+    return db.scalars(stmt).all()
 
 
 def get_book_by_id(db: Session, book_id: int):
-    return db.query(models.Book).filter(models.Book.id == book_id).first()
+    stmt = select(models.Book).where(models.Book.id == book_id)
+    return db.scalar(stmt)
 
 
 def create_book(db: Session, book: books_schemas.BookCreate):
@@ -42,4 +45,5 @@ def delete_book(db: Session, db_book: models.Book):
 
 
 def search_by_author(db: Session, author_name: str):
-    return db.query(models.Book).filter(models.Book.author.ilike(f"%{author_name}%")).all()
+    stmt = select(models.Book).where(models.Book.author.ilike(f"%{author_name}%"))
+    return db.scalars(stmt).all()
