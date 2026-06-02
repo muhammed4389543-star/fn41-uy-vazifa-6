@@ -53,4 +53,3 @@ def remove_book(book_id: int):
             raise HTTPException(status_code=404, detail="O'chirish uchun kitob topilmadi!")
         books_service.delete_book(db, db_book=db_book)
         return None
-    

@@ -9,4 +9,3 @@ class Book(Base):
     author: Mapped[str] = mapped_column()
     published_year: Mapped[int] = mapped_column()
     pages: Mapped[int] = mapped_column()
-    
